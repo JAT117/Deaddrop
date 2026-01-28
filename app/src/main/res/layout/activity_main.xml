@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SYSTEM ACTIVE"
+            android:textColor="#00FF00"
+            android:textSize="18sp"
+            android:fontFamily="monospace" />
+        <ImageButton
+            android:id="@+id/btnInfo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_dialog_info"
+            android:contentDescription="Status" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvTargetList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"
+        android:background="#112211"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:text="LOADING TARGETS..."
+        android:textColor="#00FF00"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Long-press target to remove)"
+        android:textColor="#555555"
+        android:textSize="10sp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnTrigger"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="START DEADDROP"
+        android:backgroundTint="#B71C1C"
+        android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+        <Button
+            android:id="@+id/btnPayload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ARM FILES"
+            android:backgroundTint="#424242"
+            android:layout_marginEnd="4dp"/>
+        <Button
+            android:id="@+id/btnContacts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ADD TARGET"
+            android:backgroundTint="#424242"
+            android:layout_marginStart="4dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSeedContacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SEED APK TO CONTACTS"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#1B5E20" />
+
+    <Button
+        android:id="@+id/btnQR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONFIG / RESET"
+        android:backgroundTint="#212121"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>
