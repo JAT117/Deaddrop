@@ -25,15 +25,20 @@ class LoginActivity : AppCompatActivity() {
         val titleTxt = findViewById<TextView>(R.id.tvTitle)
         val btnLgn = findViewById<Button>(R.id.btnLogin)
 
+        // Setup Mode Detection
         if (savedReal == null || savedDuress == null) {
             isSetupMode = true
-            titleTxt.text = "PROVISIONING: SET SECURE PIN"
+            titleTxt.text = "SETUP: ENTER SECURE PIN (4+ Digits)"
+        } else {
+            titleTxt.text = "ENTER PIN"
         }
 
         btnLgn.setOnClickListener {
             val pin = pinIn.text.toString()
+
+            // SECURITY CHECK: 4 Digits Minimum
             if (pin.length < 4) {
-                Toast.makeText(this, "MINIMUM 4 DIGITS", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "PIN must be at least 4 digits", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -42,10 +47,10 @@ class LoginActivity : AppCompatActivity() {
                 if (existingReal == null) {
                     prefs.edit().putString("real_pin", pin).apply()
                     pinIn.text.clear()
-                    titleTxt.text = "SET DURESS PIN"
+                    titleTxt.text = "SETUP: ENTER DURESS PIN (4+ Digits)"
                 } else {
                     if (pin == existingReal) {
-                        Toast.makeText(this, "PINS MUST NOT MATCH", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Duress PIN cannot match Real PIN", Toast.LENGTH_LONG).show()
                     } else {
                         prefs.edit().putString("duress_pin", pin).apply()
                         startActivity(Intent(this, MainActivity::class.java))
@@ -60,14 +65,12 @@ class LoginActivity : AppCompatActivity() {
                     }
                     savedDuress -> {
                         triggerSilentDuress()
-                        // RICKROLL PROTOCOL - Immediate diversion
-                        val rickroll = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
-                        startActivity(rickroll)
-                        finish()
+                        Toast.makeText(this, "System Error 505", Toast.LENGTH_LONG).show() // Fake error
+                        finishAffinity()
                     }
                     else -> {
-                        // EXIT PROTOCOL - Closes the app entirely on wrong PIN
-                        finishAffinity()
+                        Toast.makeText(this, "Invalid PIN", Toast.LENGTH_SHORT).show()
+                        pinIn.text.clear()
                     }
                 }
             }
@@ -80,9 +83,13 @@ class LoginActivity : AppCompatActivity() {
             val targets = prefs.getStringSet("nums", emptySet()) ?: emptySet()
             val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             try {
-                val loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER) ?: lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                // Corrected string interpolation for functional Maps link
-                val msg = "DURESS ALERT! Location: http://googleusercontent.com/maps.google.com/${loc?.latitude},${loc?.longitude}"
+                val loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    ?: lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+                // Fixed Link
+                val mapLink = if (loc != null) "https://maps.google.com/?q=${loc.latitude},${loc.longitude}" else "Loc: Unknown"
+                val msg = "DURESS ALERT! $mapLink"
+
                 val sms = if (Build.VERSION.SDK_INT >= 31) getSystemService(SmsManager::class.java) else SmsManager.getDefault()
                 targets.forEach { sms.sendTextMessage(it, null, msg, null, null) }
             } catch (e: Exception) {}
