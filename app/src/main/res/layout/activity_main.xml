@@ -13,18 +13,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SYSTEM ACTIVE"
+            android:text="SYSTEM ARMED"
             android:textColor="#00FF00"
             android:textSize="18sp"
             android:fontFamily="monospace" />
+
         <ImageButton
             android:id="@+id/btnInfo"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_dialog_info"
-            android:contentDescription="Status" />
+            android:src="@android:drawable/ic_dialog_info" />
     </RelativeLayout>
 
     <TextView
@@ -36,24 +36,28 @@
         android:background="#112211"
         android:fontFamily="monospace"
         android:padding="12dp"
-        android:text="LOADING TARGETS..."
+        android:text="LOADING CONFIG..."
         android:textColor="#00FF00"
         android:textSize="14sp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvCountdown"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="(Long-press target to remove)"
-        android:textColor="#555555"
-        android:textSize="10sp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"/>
+        android:gravity="center"
+        android:text="0.0"
+        android:textColor="#FF0000"
+        android:textSize="48sp"
+        android:visibility="invisible"
+        android:fontFamily="monospace" />
 
     <Button
         android:id="@+id/btnTrigger"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="180dp"
         android:text="START DEADDROP"
+        android:textSize="28sp"
+        android:textStyle="bold"
         android:backgroundTint="#B71C1C"
         android:textColor="#FFFFFF" />
 
@@ -61,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="12dp">
         <Button
             android:id="@+id/btnPayload"
             android:layout_width="0dp"
@@ -84,7 +88,7 @@
         android:id="@+id/btnSeedContacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SEED APK TO CONTACTS"
+        android:text="SEED SYSTEM (APK)"
         android:layout_marginTop="8dp"
         android:backgroundTint="#1B5E20" />
 
@@ -92,8 +96,7 @@
         android:id="@+id/btnQR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CONFIG / RESET"
+        android:text="SYSTEM CONFIG"
         android:backgroundTint="#212121"
         android:layout_marginTop="8dp" />
-
 </LinearLayout>

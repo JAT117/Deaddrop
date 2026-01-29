@@ -12,12 +12,14 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="false"
         android:label="System Utility"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-        android:icon="@android:drawable/ic_menu_manage">
+        android:icon="@android:drawable/ic_menu_manage"
+        android:usesCleartextTraffic="true">
 
         <activity android:name=".LoginActivity" android:exported="true">
             <intent-filter>
@@ -25,8 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity" android:exported="false" />
-        <activity android:name=".DecoyActivity" android:exported="false" />
 
         <service android:name=".RecordingService"
             android:foregroundServiceType="camera|microphone"
